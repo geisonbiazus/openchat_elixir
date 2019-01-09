@@ -11,10 +11,9 @@ defmodule OpenChat.UseCases.CreateUserTest do
   @about "about"
 
   test "creates a new user with the given arguments generating an id" do
-    generate_id_fn = fn -> @id end
     user_repo = UserRepo.new()
 
-    {_user_repo, user} = CreateUser.run(user_repo, @username, @password, @about, generate_id_fn)
+    {_user_repo, user} = CreateUser.run(user_repo, @username, @password, @about, @id)
     assert user == %User{id: @id, username: @username, password: @password, about: @about}
   end
 
