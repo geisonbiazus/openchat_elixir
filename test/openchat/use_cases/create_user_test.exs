@@ -9,18 +9,32 @@ defmodule OpenChat.UseCases.CreateUserTest do
   @username "username"
   @password "password"
   @about "about"
+  @user %User{id: @id, username: @username, password: @password, about: @about}
 
-  test "creates a new user with the given arguments generating an id" do
+  setup do
     user_repo = UserRepo.new()
-
-    {_user_repo, user} = CreateUser.run(user_repo, @username, @password, @about, @id)
-    assert user == %User{id: @id, username: @username, password: @password, about: @about}
+    %{user_repo: user_repo}
   end
 
-  test "stores the created user in the given repo" do
-    user_repo = UserRepo.new()
-    {user_repo, user} = CreateUser.run(user_repo, @username, @password, @about)
+  describe "when user doesn't exit" do
+    test "creates a new user with the given arguments generating an id", %{user_repo: user_repo} do
+      {:ok, _user_repo, user} = CreateUser.run(user_repo, @username, @password, @about, @id)
+      assert user == @user
+    end
 
-    assert UserRepo.find_by_id(user_repo, user.id) == user
+    test "stores the created user in the given repo", %{user_repo: user_repo} do
+      {:ok, user_repo, user} = CreateUser.run(user_repo, @username, @password, @about)
+
+      assert UserRepo.find_by_id(user_repo, user.id) == user
+    end
+  end
+
+  describe "when username is already taken" do
+    test "returns and error", %{user_repo: user_repo} do
+      user_repo = UserRepo.create(user_repo, @user)
+
+      assert CreateUser.run(user_repo, @username, @password, @about) ==
+               {:error, "Username already taken"}
+    end
   end
 end
