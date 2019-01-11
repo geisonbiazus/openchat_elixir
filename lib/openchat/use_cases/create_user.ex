@@ -11,8 +11,8 @@ defmodule OpenChat.UseCases.CreateUser do
     if username_already_exists(user_repo, username) do
       {:error, "Username already taken"}
     else
-      {user_repo, user} = create_user_on_repo(user_repo, id, username, password, about)
-      {:ok, user_repo, user}
+      user = create_user_on_repo(user_repo, id, username, password, about)
+      {:ok, user}
     end
   end
 
@@ -22,8 +22,8 @@ defmodule OpenChat.UseCases.CreateUser do
 
   defp create_user_on_repo(user_repo, id, username, password, about) do
     user = new_user(id, username, password, about)
-    user_repo = UserRepo.create(user_repo, user)
-    {user_repo, user}
+    UserRepo.create(user_repo, user)
+    user
   end
 
   defp new_user(id, username, password, about) do

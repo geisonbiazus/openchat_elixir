@@ -1,21 +1,23 @@
 defmodule OpenChat.Repositories.UserRepo do
   defstruct data: %{}
 
-  alias OpenChat.Repositories.UserRepo
-
-  def new do
-    %UserRepo{}
+  def start_link(options \\ []) do
+    Agent.start_link(fn -> %{} end, options)
   end
 
   def find_by_id(repo, id) do
-    repo.data[id]
+    Agent.get(repo, & &1[id])
   end
 
   def find_by_username(repo, username) do
-    Enum.find(repo.data, fn {_, user} -> user.username == username end)
+    Agent.get(repo, fn data ->
+      Enum.find(data, fn {_, user} -> user.username == username end)
+    end)
   end
 
   def create(repo, user) do
-    %{repo | data: Map.put(repo.data, user.id, user)}
+    Agent.update(repo, fn data ->
+      Map.put(data, user.id, user)
+    end)
   end
 end
