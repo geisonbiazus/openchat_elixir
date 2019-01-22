@@ -34,7 +34,7 @@ defmodule OpenChat.UseCases.CreateUserTest do
       UserRepo.create(user_repo, @user)
 
       assert CreateUser.run(user_repo, @username, @password, @about) ==
-               {:error, "Username already taken"}
+               {:error, "Username already in use."}
     end
   end
 end

@@ -9,7 +9,7 @@ defmodule OpenChat.UseCases.CreateUser do
 
   def run(user_repo, username, password, about, id) do
     if username_already_exists(user_repo, username) do
-      {:error, "Username already taken"}
+      {:error, "Username already in use."}
     else
       user = create_user_on_repo(user_repo, id, username, password, about)
       {:ok, user}
