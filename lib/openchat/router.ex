@@ -9,7 +9,10 @@ defmodule OpenChat.Router do
   get("/", to: OpenChat.HelloWorldPlug)
   get("/status", do: send_resp(conn, 200, "OK"))
 
-  post("/users", to: OpenChat.Controllers.CreateUserController)
+  post("/users",
+    to: OpenChat.Controllers.CreateUserController,
+    init_opts: [user_repo: UserRepo]
+  )
 
   # POST /users { username, password, about }
   # 201 - { id, username, about }

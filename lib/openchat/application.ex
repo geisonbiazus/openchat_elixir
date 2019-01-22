@@ -8,10 +8,12 @@ defmodule OpenChat.Application do
 
   def start(_type, _args) do
     # List all child processes to be supervised
+
     children = [
       # Starts a worker by calling: OpenChat.Worker.start_link(arg)
       # {OpenChat.Worker, arg},
-      {Plug.Cowboy, scheme: :http, plug: OpenChat.Router, options: [port: port()]}
+      {Plug.Cowboy, scheme: :http, plug: OpenChat.Router, options: [port: port()]},
+      {OpenChat.Repositories.UserRepo, name: UserRepo}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

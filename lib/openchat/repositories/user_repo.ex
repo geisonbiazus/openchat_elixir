@@ -1,4 +1,6 @@
 defmodule OpenChat.Repositories.UserRepo do
+  use GenServer
+
   defstruct data: %{}
 
   def start_link(options \\ []) do
