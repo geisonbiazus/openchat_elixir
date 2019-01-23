@@ -1,7 +1,7 @@
 defmodule OpenChat.Controllers.CreateUserController do
   import Plug.Conn
 
-  alias OpenChat.UseCases.CreateUser
+  alias OpenChat.UseCases.CreateUserUseCase
 
   def init(options), do: options
 
@@ -12,7 +12,7 @@ defmodule OpenChat.Controllers.CreateUserController do
       "about" => about
     } = conn.params
 
-    CreateUser.run(user_repo, username, password, about)
+    CreateUserUseCase.run(user_repo, username, password, about)
     |> respond(conn)
   end
 

@@ -1,7 +1,7 @@
-defmodule OpenChat.UseCases.CreateUserTest do
+defmodule OpenChat.UseCases.CreateUserUseCaseTest do
   use ExUnit.Case, async: true
 
-  alias OpenChat.UseCases.CreateUser
+  alias OpenChat.UseCases.CreateUserUseCase
   alias OpenChat.Entities.User
   alias OpenChat.Repositories.UserRepo
 
@@ -18,12 +18,12 @@ defmodule OpenChat.UseCases.CreateUserTest do
 
   describe "when user doesn't exit" do
     test "creates a new user with the given arguments generating an id", %{user_repo: user_repo} do
-      {:ok, user} = CreateUser.run(user_repo, @username, @password, @about, @id)
+      {:ok, user} = CreateUserUseCase.run(user_repo, @username, @password, @about, @id)
       assert user == @user
     end
 
     test "stores the created user in the given repo", %{user_repo: user_repo} do
-      {:ok, user} = CreateUser.run(user_repo, @username, @password, @about)
+      {:ok, user} = CreateUserUseCase.run(user_repo, @username, @password, @about)
 
       assert UserRepo.find_by_id(user_repo, user.id) == user
     end
@@ -33,7 +33,7 @@ defmodule OpenChat.UseCases.CreateUserTest do
     test "returns and error", %{user_repo: user_repo} do
       UserRepo.create(user_repo, @user)
 
-      assert CreateUser.run(user_repo, @username, @password, @about) ==
+      assert CreateUserUseCase.run(user_repo, @username, @password, @about) ==
                {:error, "Username already in use."}
     end
   end

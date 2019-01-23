@@ -1,4 +1,4 @@
-defmodule OpenChat.UseCases.CreateUser do
+defmodule OpenChat.UseCases.CreateUserUseCase do
   alias OpenChat.Entities.User
   alias OpenChat.Repositories.UserRepo
   alias OpenChat.Utils.IDGenerator
