@@ -15,9 +15,9 @@ defmodule OpenChat.Router do
     init_opts: [user_repo: OpenChat.Repositories.UserRepo]
   )
 
-  # POST /users { username, password, about }
-  # 201 - { id, username, about }
-  # 400 Username already in use.
+  # POST /login { username, password }
+  # 200 - { id, username, about }
+  # 404 Invalid credentials.
 
   match(_, do: send_resp(conn, 404, "Not found!!"))
 end
