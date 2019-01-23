@@ -3,6 +3,10 @@ defmodule OpenChat.Repositories.UserRepo do
 
   defstruct data: %{}
 
+  def init(args) do
+    {:ok, args}
+  end
+
   def start_link(options \\ []) do
     Agent.start_link(fn -> %{} end, options)
   end

@@ -29,4 +29,4 @@ use Mix.Config
 #
 #     import_config "#{Mix.env()}.exs"
 
-config :openchat, port: 8080
+config :openchat, port: 4321

@@ -1,6 +1,7 @@
 defmodule OpenChat.Router do
   use Plug.Router
 
+  plug(CORSPlug)
   plug(Plug.Parsers, parsers: [:urlencoded, :multipart, :json], json_decoder: Poison)
 
   plug(:match)

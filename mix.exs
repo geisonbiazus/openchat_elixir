@@ -23,6 +23,7 @@ defmodule OpenChat.MixProject do
   defp deps do
     [
       {:plug_cowboy, "~> 2.0"},
+      {:cors_plug, "~> 2.0"},
       {:elixir_uuid, "~> 1.2"},
       {:poison, "~> 3.1"}
       # {:dep_from_hexpm, "~> 0.3.0"},
