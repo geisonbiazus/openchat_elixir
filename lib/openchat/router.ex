@@ -12,7 +12,7 @@ defmodule OpenChat.Router do
 
   post("/users",
     to: OpenChat.Controllers.CreateUserController,
-    init_opts: [user_repo: UserRepo]
+    init_opts: [user_repo: OpenChat.Repositories.UserRepo]
   )
 
   # POST /users { username, password, about }
