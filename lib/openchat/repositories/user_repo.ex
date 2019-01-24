@@ -17,7 +17,10 @@ defmodule OpenChat.Repositories.UserRepo do
 
   def find_by_username(repo, username) do
     Agent.get(repo, fn data ->
-      Enum.find(data, fn {_, user} -> user.username == username end)
+      case Enum.find(data, fn {_, user} -> user.username == username end) do
+        {_, user} -> user
+        _ -> nil
+      end
     end)
   end
 
