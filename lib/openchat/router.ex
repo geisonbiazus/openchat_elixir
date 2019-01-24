@@ -1,6 +1,8 @@
 defmodule OpenChat.Router do
   use Plug.Router
 
+  alias OpenChat.Controllers.{CreateUserController, LoginController}
+
   plug(CORSPlug)
   plug(Plug.Parsers, parsers: [:urlencoded, :multipart, :json], json_decoder: Poison)
 
@@ -11,7 +13,12 @@ defmodule OpenChat.Router do
   get("/status", do: send_resp(conn, 200, "OK"))
 
   post("/users",
-    to: OpenChat.Controllers.CreateUserController,
+    to: CreateUserController,
+    init_opts: [user_repo: OpenChat.Repositories.UserRepo]
+  )
+
+  post("/login",
+    to: LoginController,
     init_opts: [user_repo: OpenChat.Repositories.UserRepo]
   )
 
