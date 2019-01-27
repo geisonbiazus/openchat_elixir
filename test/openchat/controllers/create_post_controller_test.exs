@@ -7,7 +7,7 @@ defmodule OpenChat.Controllers.CreatePostControllerTest do
 
   @user_id "user_id"
   @text "text"
-  @inappropriate_text "inappropriate"
+  @inappropriate_text "orange"
   @uuid_pattern ~r/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
 
   setup do

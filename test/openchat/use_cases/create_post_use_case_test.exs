@@ -8,7 +8,7 @@ defmodule OpenChat.UseCases.CreatePostUseCaseTest do
   @user_id "user_id"
   @post_id "post_id"
   @text "post text"
-  @inappropriate_text "Text with inappropriate word"
+  @inappropriate_text "Text with orange word"
   @date_time DateTime.from_naive!(~N[2019-01-26 13:26:08.003], "Etc/UTC")
   @post %Post{id: @post_id, text: @text, user_id: @user_id, date_time: @date_time}
 
