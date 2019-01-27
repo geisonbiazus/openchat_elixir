@@ -22,9 +22,9 @@ defmodule OpenChat.Router do
     init_opts: [user_repo: OpenChat.Repositories.UserRepo]
   )
 
-  # POST /login { username, password }
-  # 200 - { id, username, about }
-  # 404 Invalid credentials.
+  # POST /users/:id/timeline { text }
+  # 201 - { postId, u serId, text, dateTime }
+  # 400 - Post contains inappropriate language.
 
   match(_, do: send_resp(conn, 404, "Not found!!"))
 end

@@ -3,11 +3,7 @@ defmodule OpenChat.UseCases.CreateUserUseCase do
   alias OpenChat.Repositories.UserRepo
   alias OpenChat.Utils.IDGenerator
 
-  def run(user_repo, username, password, about) do
-    run(user_repo, username, password, about, IDGenerator.generate())
-  end
-
-  def run(user_repo, username, password, about, id) do
+  def run(user_repo, username, password, about, id \\ IDGenerator.generate()) do
     if username_already_exists(user_repo, username) do
       {:error, "Username already in use."}
     else
