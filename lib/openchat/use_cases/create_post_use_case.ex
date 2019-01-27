@@ -8,7 +8,7 @@ defmodule OpenChat.UseCases.CreatePostUseCase do
         post_repo,
         user_id,
         text,
-        date_time \\ DateTime.now("Etc/UTC"),
+        date_time \\ now(),
         post_id \\ IDGenerator.generate()
       ) do
     if InappropriateLanguageValidator.validate(text) do
@@ -18,5 +18,10 @@ defmodule OpenChat.UseCases.CreatePostUseCase do
     else
       {:error, "Post contains inappropriate language."}
     end
+  end
+
+  defp now do
+    {:ok, now} = DateTime.now("Etc/UTC")
+    now
   end
 end

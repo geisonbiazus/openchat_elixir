@@ -13,7 +13,8 @@ defmodule OpenChat.Application do
       # Starts a worker by calling: OpenChat.Worker.start_link(arg)
       # {OpenChat.Worker, arg},
       {Plug.Cowboy, scheme: :http, plug: OpenChat.Router, options: [port: port()]},
-      {OpenChat.Repositories.UserRepo, name: OpenChat.Repositories.UserRepo}
+      {OpenChat.Repositories.UserRepo, name: OpenChat.Repositories.UserRepo},
+      {OpenChat.Repositories.PostRepo, name: OpenChat.Repositories.PostRepo}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
