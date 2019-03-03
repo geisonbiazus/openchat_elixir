@@ -3,7 +3,7 @@ defmodule OpenChat.UseCases.CreateUserUseCaseTest do
 
   alias OpenChat.UseCases.CreateUserUseCase
   alias OpenChat.Entities.User
-  alias OpenChat.Repositories.UserRepo
+  alias OpenChat.Repositories.{UserRepo, UserRepoMemory}
 
   @id "id"
   @username "username"
@@ -12,8 +12,7 @@ defmodule OpenChat.UseCases.CreateUserUseCaseTest do
   @user %User{id: @id, username: @username, password: @password, about: @about}
 
   setup do
-    {:ok, user_repo} = UserRepo.start_link()
-    %{user_repo: user_repo}
+    %{user_repo: UserRepoMemory.new()}
   end
 
   describe "when user doesn't exit" do

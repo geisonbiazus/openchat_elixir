@@ -3,13 +3,13 @@ defmodule OpenChat.Controllers.LoginControllerTest do
   use Plug.Test
 
   alias OpenChat.Controllers.LoginController
-  alias OpenChat.Repositories.UserRepo
+  alias OpenChat.Repositories.{UserRepo, UserRepoMemory}
   alias OpenChat.Entities.User
 
   @user %User{id: "id", username: "username", password: "password", about: "about"}
 
   setup do
-    {:ok, user_repo} = UserRepo.start_link()
+    user_repo = UserRepoMemory.new()
     opts = LoginController.init(user_repo: user_repo)
 
     UserRepo.create(user_repo, @user)

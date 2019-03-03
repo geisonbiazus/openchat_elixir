@@ -13,7 +13,7 @@ defmodule OpenChat.Application do
       # Starts a worker by calling: OpenChat.Worker.start_link(arg)
       # {OpenChat.Worker, arg},
       {Plug.Cowboy, scheme: :http, plug: OpenChat.Router, options: [port: port()]},
-      {OpenChat.Repositories.UserRepo, name: OpenChat.Repositories.UserRepo},
+      {OpenChat.Repositories.UserRepoMemory, name: OpenChat.Repositories.UserRepoMemory},
       {OpenChat.Repositories.PostRepoMemory, name: OpenChat.Repositories.PostRepoMemory}
     ]
 

@@ -27,9 +27,9 @@ defmodule OpenChat.Repositories.PostRepoMemory do
   end
 end
 
-alias OpenChat.Repositories.PostRepoMemory
+alias OpenChat.Repositories.{PostRepo, PostRepoMemory}
 
-defimpl OpenChat.Repositories.PostRepo, for: PostRepoMemory do
+defimpl PostRepo, for: PostRepoMemory do
   def find_by_id(repo, id), do: PostRepoMemory.find_by_id(repo, id)
   def create(repo, post), do: PostRepoMemory.create(repo, post)
 end

@@ -1,7 +1,7 @@
 defmodule OpenChat.UseCases.LoginUseCaseTest do
   use ExUnit.Case, async: true
 
-  alias OpenChat.Repositories.UserRepo
+  alias OpenChat.Repositories.{UserRepo, UserRepoMemory}
   alias OpenChat.Entities.User
   alias OpenChat.UseCases.LoginUseCase
 
@@ -9,8 +9,7 @@ defmodule OpenChat.UseCases.LoginUseCaseTest do
 
   describe "run" do
     setup do
-      {:ok, repo} = UserRepo.start_link()
-      %{user_repo: repo}
+      %{user_repo: UserRepoMemory.new()}
     end
 
     test "authenticates the user with valid credentials", %{user_repo: repo} do

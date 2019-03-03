@@ -3,7 +3,7 @@ defmodule OpenChat.Controllers.CreateUserControllerTest do
   use Plug.Test
 
   alias OpenChat.Controllers.CreateUserController
-  alias OpenChat.Repositories.UserRepo
+  alias OpenChat.Repositories.UserRepoMemory
 
   @username "username"
   @password "password"
@@ -11,8 +11,7 @@ defmodule OpenChat.Controllers.CreateUserControllerTest do
   @uuid_pattern ~r/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
 
   setup do
-    {:ok, user_repo} = UserRepo.start_link()
-    opts = CreateUserController.init(user_repo: user_repo)
+    opts = CreateUserController.init(user_repo: UserRepoMemory.new())
     %{opts: opts}
   end
 
