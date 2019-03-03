@@ -4,6 +4,7 @@ defmodule OpenChat.UseCases.CreatePostUseCaseTest do
   alias OpenChat.UseCases.CreatePostUseCase
   alias OpenChat.Entities.Post
   alias OpenChat.Repositories.PostRepo
+  alias OpenChat.Repositories.PostRepoMemory
 
   @user_id "user_id"
   @post_id "post_id"
@@ -13,9 +14,7 @@ defmodule OpenChat.UseCases.CreatePostUseCaseTest do
   @post %Post{id: @post_id, text: @text, user_id: @user_id, date_time: @date_time}
 
   setup do
-    {:ok, post_repo} = PostRepo.start_link()
-
-    %{post_repo: post_repo}
+    %{post_repo: PostRepoMemory.new()}
   end
 
   describe "run" do

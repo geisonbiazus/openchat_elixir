@@ -4,6 +4,6 @@ defmodule OpenChat.Application.Context do
   end
 
   def post_repo do
-    OpenChat.Repositories.PostRepo
+    OpenChat.Repositories.PostRepoMemory.new(OpenChat.Repositories.PostRepoMemory)
   end
 end

@@ -14,7 +14,7 @@ defmodule OpenChat.Application do
       # {OpenChat.Worker, arg},
       {Plug.Cowboy, scheme: :http, plug: OpenChat.Router, options: [port: port()]},
       {OpenChat.Repositories.UserRepo, name: OpenChat.Repositories.UserRepo},
-      {OpenChat.Repositories.PostRepo, name: OpenChat.Repositories.PostRepo}
+      {OpenChat.Repositories.PostRepoMemory, name: OpenChat.Repositories.PostRepoMemory}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

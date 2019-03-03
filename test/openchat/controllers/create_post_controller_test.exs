@@ -2,7 +2,7 @@ defmodule OpenChat.Controllers.CreatePostControllerTest do
   use ExUnit.Case, async: true
   use Plug.Test
 
-  alias OpenChat.Repositories.PostRepo
+  alias OpenChat.Repositories.PostRepoMemory
   alias OpenChat.Controllers.CreatePostController
 
   @user_id "user_id"
@@ -11,8 +11,7 @@ defmodule OpenChat.Controllers.CreatePostControllerTest do
   @uuid_pattern ~r/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
 
   setup do
-    {:ok, post_repo} = PostRepo.start_link()
-    opts = CreatePostController.init(post_repo: post_repo)
+    opts = CreatePostController.init(post_repo: PostRepoMemory.new())
     %{opts: opts}
   end
 
